@@ -9,7 +9,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        <link href="adminLTE/bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
         <!-- Styles -->
         <style>
             html, body {

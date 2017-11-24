@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return view('page/index');
+    });
+    Route::any('/home', 'AdminController@home')->name('home');
+    Route::post('addMerchants', 'AdminController@addMerchants')->name('addMerchants');
+});
