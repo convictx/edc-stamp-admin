@@ -28,6 +28,8 @@
 {{HTML::style('adminLTE/bower_components/font-awesome/css/font-awesome.min.css')}}
 <!-- Ionicons -->
 {{HTML::style('adminLTE/bower_components/Ionicons/css/ionicons.min.css')}}
+<!-- DataTables -->
+{{HTML::style('adminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}
 <!-- Theme style -->
 {{HTML::style('adminLTE/dist/css/AdminLTE.min.css')}}
 <!-- bootstrap datepicker -->
@@ -36,6 +38,10 @@
 <!-- AdminLTE Skins. Choose a skin from the css/skins
    folder instead of downloading all of them to reduce the load. -->
 {{HTML::style('adminLTE/dist/css/skins/_all-skins.min.css')}}
+
+
+
+
     </head>
     <body>
 
@@ -47,10 +53,10 @@
         <!-- Content Header (Page header) -->
             <div class="">
                 @yield('input_form_merchants')
-                @yield('input_form_branchs')
-                @yield('input_form_campaigns')
+              {{--   @yield('input_form_branchs')
+                @yield('input_form_campaigns') --}}
                 
-                
+                @yield('dataTable');
             </div>
         <section class="content-header">
        
@@ -65,6 +71,9 @@
 <!-- AdminLTE for demo purposes -->
 {{HTML::script('adminLTE/dist/js/demo.js')}}
 {{HTML::script('adminLTE/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}
+<!-- DataTables -->
+{{HTML::script('adminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js')}}
+
 
  @yield('js')
     </body>
