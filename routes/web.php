@@ -19,6 +19,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('page/index');
     });
+    Route::get('/test', 'testController@test');
     Route::any('/home', 'AdminController@home')->name('home');
     Route::post('addMerchants', 'AdminController@addMerchants')->name('addMerchants');
 });
