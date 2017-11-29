@@ -2,7 +2,13 @@
 
 @section('dataTable')
 <!-- Start: Campaign list panel -->
-
+<div class="panel" id="loadingDiv" style="margin-top:10px; margin-right: 10px">
+    <div class="panel-body">
+        <div class="btn-group">
+            <a href="" class="btn bg-teal-400 btn-raised legitRipple createBTN"><i class="icon-plus-circle2 position-left"></i>  Add New</a>
+        </div>
+    </div>
+</div>
 <div class="panel">
 	<div class="panel-body table-responsive">
 		<table class="table table-striped table-hover datatable-dom-position" id="campaign-table" data-page-length="10" width="100%">
@@ -27,7 +33,6 @@
 		</table>
 	</div>
 </div>
-
 <!-- End: Campaign list panel -->
 @endsection
 
@@ -47,7 +52,6 @@
         searching: false,
         retrieve : true,
         destroy : true,
-        order: [[ 2, "asc" ]],
         cache: true,
         dom: '<"datatable-header"fl><t><"datatable-footer"ip>',
         language: {
@@ -60,6 +64,8 @@
         ajax: {
             url: url + '/data',
             type: 'GET',
+            beforeSend: function() { $('.loading').show(); },
+            complete: function() { $('.loading').hide(); },
             data: function (d) {
                 //launch-date-input
                 d.search_text_input = $('#search-text-input').val();
@@ -84,14 +90,14 @@
             {
                 data: 'merchant_id',
                 name: 'merchant_id',
-                orderable: true,
+                orderable: false,
                 searchable: false,
                 className: 'text-center',
                 render: function(data, type, row){
                     return data;
                 }
             },
-            { data: 'name', name: 'name'},
+            { data: 'name', name: 'name', orderable: false},
             {
                 data: 'detail',
                 name: 'detail',
@@ -102,9 +108,9 @@
                     return data;
                 }
             },
-            { data: 'stamp_logo_url', name: 'stamp_logo_url'},
-            { data: 'stamp_per_page', name: 'stamp_per_page'},
-            { data: 'background_url', name: 'background_url'},
+            { data: 'stamp_logo_url', name: 'stamp_logo_url', orderable: false},
+            { data: 'stamp_per_page', name: 'stamp_per_page', orderable: false},
+            { data: 'background_url', name: 'background_url', orderable: false},
             {
                 data: 'banner_url',
                 name: 'banner_url',
@@ -125,11 +131,11 @@
                     return '<a onclick="deleteItems(\'' + row.id + '\')"><i class="icon-trash text-danger"></a>';
                 }
             },
-            { data: 'active', name: 'active'},
-            { data: 'collect_expired_at', name: 'collect_expired_at'},
-            { data: 'campaign_expired_at', name: 'campaign_expired_at'},
-            { data: 'verify_type', name: 'verify_type'},
-            { data: 'started_at', name: 'started_at'}
+            { data: 'active', name: 'active', orderable: false},
+            { data: 'collect_expired_at', name: 'collect_expired_at', orderable: false},
+            { data: 'campaign_expired_at', name: 'campaign_expired_at', orderable: false},
+            { data: 'verify_type', name: 'verify_type', orderable: false},
+            { data: 'started_at', name: 'started_at', orderable: false}
         ]
     });
 
@@ -137,6 +143,7 @@
         //window.location.reload();
         $('.check-all').attr('checked', false);
     }
+
 </script>
 
 @include('common._datatable')

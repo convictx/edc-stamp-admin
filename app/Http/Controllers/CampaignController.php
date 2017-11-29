@@ -27,7 +27,6 @@ class CampaignController extends Controller
     public function getData(Request $request)
     {
         $param = $request->input();
-        print_r($param); die;
         $client = new Client();
         $res = $client->request('GET', 'http://api-estamp.wls-aws.loc/admin/campaigns', [
             'auth' => ['admin', 'estamp']

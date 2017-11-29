@@ -44,18 +44,20 @@
 {{HTML::style('adminLTE/dist/css/skins/_all-skins.min.css')}}
 {{HTML::style('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css')}}
 
+<!-- Loading for Ajax -->
+{{HTML::style('adminLTE/dist/css/loading.css')}}
 
 
     </head>
     <body>
-
+    <div class="loading">Loading&#8230;</div>
       
         <aside class="main-sidebar">
             @include('page.leftmenu')
         </aside>
         <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-            <div class="">
+            <div class="container">
                 @yield('input_form')
               {{--   @yield('input_form_branchs')
                 @yield('input_form_campaigns') --}}
