@@ -99,7 +99,7 @@ class AdminController extends BaseController
     	$input = $request->input();
 
 		$client = new Client(); //GuzzleHttp\Client
-		$res = $client->request('PUT',  $url, [
+		$res = $client->request('POST',  $url, [
             'auth' => ['admin', 'estamp'],
             'json' => $input
         ]);
@@ -114,7 +114,7 @@ class AdminController extends BaseController
         $input = $request->input();
 
         $client = new Client(); //GuzzleHttp\Client
-        $res = $client->request('PUT',  $url, [
+        $res = $client->request('POST',  $url, [
             'auth' => ['admin', 'estamp'],
             'json' => $input
         ]);
