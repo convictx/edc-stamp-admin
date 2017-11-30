@@ -26,5 +26,6 @@ Route::prefix('admin')->group(function () {
 	Route::any('/campaigns', 'AdminController@Campaigns')->name('campaigns');
     Route::post('addMerchants', 'AdminController@addMerchants')->name('addMerchants');
     Route::post('addBranchs', 'AdminController@addBranchs')->name('addBranchs');
+    Route::post('addCampaigns', 'AdminController@addCampaigns')->name('addCampaigns');
     
 });
