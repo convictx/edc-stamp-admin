@@ -21,12 +21,13 @@ Route::prefix('admin')->group(function () {
     });
     Route::get('/test', 'testController@test');
     Route::any('/home', 'AdminController@home')->name('home');
-    Route::any('/merchants', 'AdminController@merchants')->name('merchants');
+   
 	Route::any('/branchs', 'AdminController@branchs')->name('branchs');
-    Route::get('/campaigns', 'CampaignController@index')->name('campaigns');
-    Route::get('/banner/data', 'CampaignController@getData');
-    Route::post('addMerchants', 'AdminController@addMerchants')->name('addMerchants');
     Route::post('addBranchs', 'AdminController@addBranchs')->name('addBranchs');
-    Route::post('addCampaigns', 'AdminController@addCampaigns')->name('addCampaigns');
+    
+	Route::any('merchants', 'MerchantController@index')->name('merchants');
+	Route::post('addMerchants', 'MerchantController@addMerchants')->name('addMerchants');
+    Route::get('/campaigns', 'CampaignController@index')->name('campaigns');
+    Route::post('addCampaigns', 'CampaignController@addCampaigns')->name('addCampaigns');
     
 });

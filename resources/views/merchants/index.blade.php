@@ -89,24 +89,24 @@
       })
 
       var dataSet = <?php echo $data; ?>;
-     
-      $(function () {
-        $('#example').DataTable( {
-              'data'        : dataSet,
-              'paging'      : true,
-              'lengthChange': false,
-              'searching'   : false,
-              'ordering'    : true,
-              'info'        : true,
-              'autoWidth'   : false,
-              columns: [
-                  { title: "id" },
-                  { title: "name" },
-                  { title: "logo" },
-                  { title: "banner" }
-              ]
-          } );
-      })
+
+          $(function () {
+            $('#example').DataTable( {
+                  'data'        : dataSet,
+                  'paging'      : true,
+                  'lengthChange': false,
+                  'searching'   : false,
+                  'ordering'    : true,
+                  'info'        : true,
+                  'autoWidth'   : false,
+                  columns: [
+                      { title: "id" },
+                      { title: "name" },
+                      { title: "logo" },
+                      { title: "banner" }
+                  ]
+              } );
+          })
     
     </script>
 @endsection

@@ -12,7 +12,7 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Client;
 
-class CampaignController extends Controller
+class MerchantController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,28 +30,23 @@ class CampaignController extends Controller
         $dataMerchants = json_decode($res->getBody(), true);   
         $dataMerchants = $dataMerchants['data'];
 
-        $url = 'http://api-estamp.wls-aws.loc/admin/getMerchants';
-        $client = new Client(); //GuzzleHttp\Client
-        $res = $client->request('GET',  $url, [
-            'auth' => ['admin', 'estamp'],
-        ]);
-        $dataset = [];
         $data = json_decode($res->getBody(), true);
 
         foreach ($data['data']['data'] as $key => $value) {
             $dataset[] = array_flatten($value);
         }
         
-        return view('campaign.index')
+        return view('merchants.index')
                     ->with('dataMerchants', $dataMerchants)
                     ->with('data', json_encode($dataset));
     }
 
-     public function addCampaigns(Request $request){
-        $url = 'http://api-estamp.wls-aws.loc/admin/addCampaigns';
+
+     public function addMerchants(Request $request){
+        $url = 'http://api-estamp.wls-aws.loc/admin/addMerchants';
         // $token = self::getToken();
         $input = $request->input();
-        $input = $input['data'];
+
         $client = new Client(); //GuzzleHttp\Client
         $res = $client->request('POST',  $url, [
             'auth' => ['admin', 'estamp'],
@@ -59,7 +54,7 @@ class CampaignController extends Controller
         ]);
 
         $data = json_decode($res->getBody()->getContents(), true);
-        return $data;
+         return back();
     }
 
     public function getData(Request $request)
