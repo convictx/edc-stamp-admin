@@ -24,48 +24,56 @@
                 border-right: 1px solid #d3d6df;
             }
         </style>
-<!-- Bootstrap 3.3.7 -->
-{{HTML::style('adminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css')}}
-<!-- Font Awesome -->
-{{HTML::style('adminLTE/bower_components/font-awesome/css/font-awesome.min.css')}}
-<!-- Ionicons -->
-{{HTML::style('adminLTE/bower_components/Ionicons/css/ionicons.min.css')}}
-<!-- DataTables -->
-{{HTML::style('css/jquery.dataTables.min.css')}}
-{{HTML::style('adminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}
+        <!-- Bootstrap 3.3.7 -->
+        {{HTML::style('adminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css')}}
+        <!-- Font Awesome -->
+        {{HTML::style('adminLTE/bower_components/font-awesome/css/font-awesome.min.css')}}
+        <!-- Ionicons -->
+        {{HTML::style('adminLTE/bower_components/Ionicons/css/ionicons.min.css')}}
+        <!-- DataTables -->
+        {{HTML::style('css/jquery.dataTables.min.css')}}
+        {{HTML::style('adminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}
 
-<!-- Theme style -->
-{{HTML::style('adminLTE/dist/css/AdminLTE.min.css')}}
-<!-- bootstrap datepicker -->
-{{HTML::style('adminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}
+        <!-- Theme style -->
+        {{HTML::style('adminLTE/dist/css/AdminLTE.min.css')}}
+        <!-- bootstrap datepicker -->
+        {{HTML::style('adminLTE/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}
 
-<!-- AdminLTE Skins. Choose a skin from the css/skins
-   folder instead of downloading all of them to reduce the load. -->
-{{HTML::style('adminLTE/dist/css/skins/_all-skins.min.css')}}
-{{HTML::style('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css')}}
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+        folder instead of downloading all of them to reduce the load. -->
+        {{HTML::style('adminLTE/dist/css/skins/_all-skins.min.css')}}
+        {{HTML::style('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css')}}
 
-<!-- Loading for Ajax -->
-{{HTML::style('adminLTE/dist/css/loading.css')}}
-
-
+        <!-- Loading for Ajax -->
+        {{HTML::style('adminLTE/dist/css/loading.css')}}
     </head>
-    <body>
-    <div class="loading">Loading&#8230;</div>
-      
-        <aside class="main-sidebar">
-            @include('page.leftmenu')
-        </aside>
-        <div class="content-wrapper">
+    <body class="hold-transition skin-blue sidebar-mini">
+        <div class="loading" style="display: none;">Loading&#8230;</div>
+        <div class="loadpage">Loading&#8230;</div>
+        <div class="wrapper" style="height: auto; min-height: 100%;">
+            <header class="main-header">
+                <!-- Logo -->
+                <a href="index2.html" class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"><b>E</b>S</span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"><b>E-Stamp</b> Admin</span>
+                </a>
+                <!-- Header Navbar: style can be found in header.less -->
+                <nav class="navbar navbar-static-top">
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                </nav>
+            </header>
+            @include('layouts.sidebar')
+         <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-            <div class="container">
-                @yield('input_form')
-              {{--   @yield('input_form_branchs')
-                @yield('input_form_campaigns') --}}
-                
-                @yield('dataTable')
-            </div>
+                @yield('content')
         
-       
+        </div> 
+        </div>
 <!-- jQuery 3 -->
 {{HTML::script('adminLTE/bower_components/jquery/dist/jquery.min.js')}}
 <!-- Bootstrap 3.3.7 -->
@@ -83,5 +91,10 @@
 {{HTML::script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js')}}
 
  @yield('js', '<span class="label bg-danger">MISSING FOOTER SCRIPT</span>')
+<script>
+    $(function() {
+        $('.loadpage').hide();
+    });
+</script>
     </body>
 </html>

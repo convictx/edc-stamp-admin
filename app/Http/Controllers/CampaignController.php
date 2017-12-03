@@ -66,9 +66,9 @@ class CampaignController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('campaign.edit');
     }
 
     /**
@@ -79,7 +79,16 @@ class CampaignController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //return ['status' => true];
+        $param = $request->input();
+        $client = new Client();
+        $res = $client->request('POST', 'http://api-estamp.wls-aws.loc/admin/campaign', [
+            'auth' => ['admin', 'estamp'],
+            'json' => $param
+        ]);
+        $data = json_decode($res->getBody()->getContents(), true);
+        print_r($res); die;
+        return ['status' => true];
     }
 
     /**

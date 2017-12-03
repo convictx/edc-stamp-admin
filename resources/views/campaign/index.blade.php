@@ -1,45 +1,51 @@
 @extends('layouts.main')
 
-@section('dataTable')
-<!-- Start: Campaign list panel -->
-<div class="panel" id="loadingDiv" style="margin-top:10px; margin-right: 10px">
-    <div class="panel-body">
-        <div class="btn-group">
-            <a href="" class="btn bg-teal-400 btn-raised legitRipple createBTN"><i class="icon-plus-circle2 position-left"></i>  Add New</a>
+@section('content')
+<section class="content-header">
+    <h1>
+        Campaigns
+        <small> List</small>
+    </h1>
+</section>
+<section class="content">
+    <div class="box">
+        <div class="box-header with-border">
+            <h3 class="box-title"></h3>
+            <div class="box-tools pull-right">
+            <a href="campaigns/create" class="btn btn-box-tool">
+                <i class="fa fa-plus"></i> Add New</a>
+            </div>
+        </div>
+        <div class="box-body">
+            <table class="table table-striped table-hover datatable-dom-position" id="campaign-table" data-page-length="10" width="100%">
+                <thead>
+                    <tr>
+                        <th class="">ID</th>
+                        <th class="">Merchant&nbsp;ID</th>
+                        <th class="">Campaign&nbsp;Name</th>
+                        <th class="">Detail</th>
+                        <th class="">stamp_logo_url</th>
+                        <th class="">stamp_per_page</th>
+                        <th class="">background_url</th>
+                        <th class="">banner_url</th>
+                        <th class="">policy</th>
+                        <th class="">Active</th>
+                        <th class="">collect_expired_at</th>
+                        <th class="">campaign_expired_at</th>
+                        <th class="">verify_type</th>
+                        <th class="">started_at</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
-</div>
-<div class="panel">
-	<div class="panel-body table-responsive">
-		<table class="table table-striped table-hover datatable-dom-position" id="campaign-table" data-page-length="10" width="100%">
-			<thead>
-				<tr>
-					<th class="">ID</th>
-					<th class="">Merchant&nbsp;ID</th>
-					<th class="">Campaign&nbsp;Name</th>
-					<th class="">Detail</th>
-					<th class="">stamp_logo_url</th>
-					<th class="">stamp_per_page</th>
-					<th class="">background_url</th>
-					<th class="">banner_url</th>
-					<th class="">policy</th>
-                    <th class="">Active</th>
-                    <th class="">collect_expired_at</th>
-                    <th class="">campaign_expired_at</th>
-                    <th class="">verify_type</th>
-                    <th class="">started_at</th>
-				</tr>
-			</thead>
-		</table>
-	</div>
-</div>
+</section>
 <!-- End: Campaign list panel -->
 @endsection
 
 @section('js')
 
 <script type="text/javascript">
-
     var url = '/admin/banner';
     
     var oTable = $('#campaign-table').on('error.dt',function(e, settings, techNote, message){
@@ -138,7 +144,6 @@
             { data: 'started_at', name: 'started_at', orderable: false}
         ]
     });
-
     if (!!window.performance && window.performance.navigation.type === 2) {
         //window.location.reload();
         $('.check-all').attr('checked', false);
