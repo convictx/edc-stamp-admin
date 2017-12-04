@@ -57,6 +57,7 @@ function callAjax(type, url, data, successCallback = null, postSuccessCallback =
         processData: false,
         contentType: false,
         success: function(data) {
+            console.log(data);
             if (data.status || data.success) {
                 if(successCallback) {
                     successCallback();
@@ -79,11 +80,9 @@ function callAjax(type, url, data, successCallback = null, postSuccessCallback =
 
 function onAjaxSuccess(data, callback = null) {
     swal({
-        //title: "{{ trans('validation.create.title') }}",
-        title: "Save success.",
+        title: "Save success",
         text: data.messages,
         type: "success",
-        //confirmButtonText: "{{ trans('validation.btn_ok') }}"
         confirmButtonText: "OK"
         },
         callback
@@ -92,59 +91,16 @@ function onAjaxSuccess(data, callback = null) {
 
 function onAjaxFail(data, callback = null) {
     swal({
-        title: "{{ trans('validation.create.fail') }}",
+        title: "Save fail.",
         text: data.error ? data.error : data.messages,
         type: "warning",
-        confirmButtonText: "{{ trans('validation.btn_ok') }}"
+        confirmButtonText: "OK"
         },
         callback
     );
 }
 
-function getCheckedId() {
-    var ids = $('.ids:checked').serializeArray();
-    return ids.map(function(elem) {
-        return elem.value;
-    }).join();
-}
-
 $(document).ready(function() {
-    $('.btn.fileupload-exists').on('click',function(){
-        if($('#thumb_tmp').val() != ''){
-            $("input[name='thumb_old']").val($('#thumb_tmp').val());
-            $('.thumb_old').attr('src',$('#thumb_tmp').val());
-            //$('#thumb-error').attr('class', '');    
-        } else {
-            $("input[name='thumb_old']").val('');
-            $('.thumb_old').attr('src',"{{ URL::asset('/assets/images/no-img.png') }}");
-        }
-    });
-    suggestion = {
-        'A1': 'Size 285x380 pixel, .jpg or .png file format only',
-        'A2': 'Size 380x190 pixel, .jpg or .png file format only',
-        'A3': 'Size 190x190 pixel, .jpg or .png file format only',
-        'A4': 'Size 190x190 pixel, .jpg or .png file format only',
-        'A5': 'Size 190x190 pixel, .jpg or .png file format only',
-        'A6': 'Size 190x190 pixel, .jpg or .png file format only',
-    };
-    if ($("select[name='position']").val() != ''){
-        $("#image-format").text(suggestion[$("select[name='position']").val()]);
-    }
-    else {
-        $("#image-format").text('.jpg and .png file format only');
-    }       
-    $("select[name='position']").on('change', function(){
-        if ($("select[name='position']").val() != ''){
-            $("#image-format").text(suggestion[$("select[name='position']").val()]);
-        }
-        else {
-            $("#image-format").text('.jpg and .png file format only');
-        }
-    })
-    $(".select-dropdown").select2({
-        minimumResultsForSearch: -1
-    });
-
     if (!!window.performance && window.performance.navigation.type === 2) {
         window.location.reload();
     }
