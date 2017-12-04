@@ -24,12 +24,28 @@ class CampaignController extends Controller
         return view('campaign.index');
     }
 
+    public function setFilter($params) {
+        $query = [];
+        if(isset($params['length'])) {
+            $query['limit'] = $params['length'];
+        }
+
+        if(isset($params['start']) && $params['start'] != 0 && $params['start'] != '') {
+            $query['page'] = ($params['start'] / $params['length']) + 1;
+        } 
+
+        return $query;
+    }
+
     public function getData(Request $request)
     {
         $param = $request->input();
+        $filter = $this->setFilter($param);
+        
         $client = new Client();
         $res = $client->request('GET', 'http://api-estamp.wls-aws.loc/admin/campaigns', [
-            'auth' => ['admin', 'estamp']
+            'auth' => ['admin', 'estamp'],
+            'query' => $filter
         ]);
         $data = json_decode($res->getBody()->getContents(), true);
         
