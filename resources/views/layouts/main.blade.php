@@ -33,7 +33,7 @@
         <!-- DataTables -->
         {{HTML::style('css/jquery.dataTables.min.css')}}
         {{HTML::style('adminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}
-
+        
         <!-- Theme style -->
         {{HTML::style('adminLTE/dist/css/AdminLTE.min.css')}}
         <!-- bootstrap datepicker -->
@@ -89,6 +89,7 @@
 {{HTML::script('adminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js')}}
 {{HTML::script('https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.0.5/sweetalert2.all.min.js')}}
 {{HTML::script('https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js')}}
+{{HTML::script('//cdn.datatables.net/plug-ins/1.10.16/dataRender/ellipsis.js')}}
 
  @yield('js', '<span class="label bg-danger">MISSING FOOTER SCRIPT</span>')
 <script>

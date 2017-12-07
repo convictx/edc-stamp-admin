@@ -12,7 +12,7 @@ use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Client;
 
-class CampaignController extends Controller
+class StampController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class CampaignController extends Controller
      */
     public function index()
     {
-        return view('campaign.index');
+        return view('stamp.index');
     }
 
     public function setFilter($params) {
@@ -36,14 +36,13 @@ class CampaignController extends Controller
 
         return $query;
     }
-
+    
     public function getData(Request $request)
     {
         $param = $request->input();
         $filter = $this->setFilter($param);
-        
         $client = new Client();
-        $res = $client->request('GET', env('API_HOST').'admin/campaigns', [
+        $res = $client->request('GET', env('API_HOST').'admin/stamps', [
             'auth' => ['admin', 'estamp'],
             'query' => $filter
         ]);
@@ -52,19 +51,13 @@ class CampaignController extends Controller
         foreach($data['data'] as $val) {
             $dataModel[] = [
                 'id' => $val['id'],
-                'merchant_id' => $val['merchant_id'],
-                'name' => $val['name'],
-                'detail' => $val['detail'],
-                'stamp_logo_url' => $val['stamp_logo_url'],
-                'stamp_per_page' => $val['stamp_per_page'],
-                'background_url' => $val['background_url'],
-                'banner_url' => $val['banner_url'],
-                'policy' => $val['policy'],
-                'active' => $val['active'],
-                'collect_expired_at' => $val['collect_expired_at'],
-                'campaign_expired_at' => $val['campaign_expired_at'],
-                'verify_type' => $val['verify_type'],
-                'started_at' => $val['started_at']
+                'position' => $val['position'],
+                'user_id' => $val['user_id'],
+                'campaign_id' => $val['campaign_id'],
+                'status' => $val['status'],
+                'merchant_code' => $val['merchant_code'],
+                'branch_code' => $val['branch_code'],
+                'merchant_terminal' => $val['merchant_terminal']
             ];
         }
         
@@ -84,7 +77,7 @@ class CampaignController extends Controller
      */
     public function create(Request $request)
     {
-        return view('campaign.edit');
+        //
     }
 
     /**
@@ -95,20 +88,7 @@ class CampaignController extends Controller
      */
     public function store(Request $request)
     {
-        $param = $request->input();
-        $client = new Client();
-        $res = $client->request('POST', env('API_HOST').'admin/campaign', [
-            'auth' => ['admin', 'estamp'],
-            'json' => $param
-        ]);
-
-        $data = json_decode($res->getBody()->getContents(), true);
-        
-        if(isset($data['error'])){
-            return ['status' => false, 'messages' => $data['error']['message']];
-        } else {
-            return ['status' => true];
-        }
+        //
     }
 
     /**

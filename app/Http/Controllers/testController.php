@@ -16,7 +16,7 @@ class testController extends BaseController
     public function test()
     {
         $client = new Client();
-        $res = $client->request('GET', 'http://api-estamp.wls-aws.loc/admin/campaigns', [
+        $res = $client->request('GET', env('API_HOST').'admin/campaigns', [
             'auth' => ['admin', 'estamp']
         ]);
         $data = json_decode($res->getBody()->getContents(), true);

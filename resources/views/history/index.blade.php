@@ -3,7 +3,7 @@
 @section('content')
 <section class="content-header">
     <h1>
-        Campaigns
+        Histories
         <small> List</small>
     </h1>
 </section>
@@ -11,29 +11,20 @@
     <div class="box">
         <div class="box-header with-border">
             <h3 class="box-title"></h3>
-            <div class="box-tools pull-right">
-            <a href="campaigns/create" class="btn btn-box-tool">
-                <i class="fa fa-plus"></i> Add New</a>
-            </div>
         </div>
         <div class="box-body">
-            <table class="table table-striped table-hover datatable-dom-position" id="campaign-table" data-page-length="10" width="100%">
+            <table class="table table-striped table-hover datatable-dom-position" id="history-table" data-page-length="10" width="100%">
                 <thead>
                     <tr>
                         <th class="">ID</th>
-                        <th class="">Merchant&nbsp;ID</th>
-                        <th class="">Campaign&nbsp;Name</th>
-                        <th class="">Detail</th>
-                        <th class="">stamp_logo_url</th>
-                        <th class="">stamp_per_page</th>
-                        <th class="">background_url</th>
-                        <th class="">banner_url</th>
-                        <th class="">policy</th>
-                        <th class="">Active</th>
-                        <th class="">collect_expired_at</th>
-                        <th class="">campaign_expired_at</th>
-                        <th class="">verify_type</th>
-                        <th class="">started_at</th>
+                        <th class="">Stamp&nbsp;ID</th>
+                        <th class="">User&nbsp;ID</th>
+                        <th class="">Campaign&nbsp;ID</th>
+                        <th class="">Campaign&nbsp;name</th>
+                        <th class="">Reward&nbsp;name</th>
+                        <th class="">Campaign&nbsp;expired</th>
+                        <th class="">Reward&nbsp;expired</th>
+                        <th class="">Position</th>
                     </tr>
                 </thead>
             </table>
@@ -46,9 +37,9 @@
 @section('js')
 
 <script type="text/javascript">
-    var url = '/admin/campaign';
+    var url = '/admin/history';
     
-    var oTable = $('#campaign-table').on('error.dt',function(e, settings, techNote, message){
+    var oTable = $('#history-table').on('error.dt',function(e, settings, techNote, message){
         swal('Error!', 'Error connection', 'error');
     }).DataTable({
         scrollY: true,
@@ -79,7 +70,7 @@
             },
             error: function(xhr, error, thrown) {
                 swal('Error!', 'Error connection', 'error');
-                $('#campaign-table').find('tbody').find('td').html('No Data, please try again later');
+                $('#history-table').find('tbody').find('td').html('No Data, please try again later');
             }
         },
         columns: [
@@ -93,48 +84,91 @@
                     return data;
                 }
             },
-            {
-                data: 'merchant_id',
-                name: 'merchant_id',
-                orderable: false,
-                searchable: false,
-                className: 'text-center',
-                render: function(data, type, row){
+            { 
+                data: 'stamp_id', 
+                name: 'stamp_id', 
+                orderable: false, 
+                render: function ( data, type, row ) {
+                    if(data == null){
+                        return '';
+                    }
+                    return data.length > 10 ?
+                        data.substr( 0, 10 ) + '…' + data.substr(data.length-10, data.length) :
+                        data;
+                }
+            },
+            { 
+                data: 'user_id', 
+                name: 'user_id', 
+                orderable: false, 
+                render: function ( data, type, row ) {
+                    if(data == null){
+                        return '';
+                    }
+                    return data.length > 10 ?
+                        data.substr( 0, 10 ) + '…' + data.substr(data.length-10, data.length) :
+                        data;
+                }
+            },
+            { 
+                data: 'campaign_id', 
+                name: 'campaign_id', 
+                orderable: false, 
+                render: function ( data, type, row ) {
+                    if(data == null){
+                        return '';
+                    }
+                    return data.length > 10 ?
+                        data.substr( 0, 10 ) + '…' + data.substr(data.length-10, data.length) :
+                        data;
+                }
+            },
+            { 
+                data: 'campaign_name', 
+                name: 'campaign_name', 
+                orderable: false, 
+                render: function ( data, type, row ) {
+                    if(data == null){
+                        return '';
+                    }
+                    return data.length > 10 ?
+                        data.substr( 0, 10 ) + '…' + data.substr(data.length-10, data.length) :
+                        data;
+                }
+            },
+            { 
+                data: 'reward_name', 
+                name: 'reward_name', 
+                orderable: false, 
+                render: function ( data, type, row ) {
+                    if(data == null){
+                        return '';
+                    }
+                    return data.length > 10 ?
+                        data.substr( 0, 10 ) + '…' + data.substr(data.length-10, data.length) :
+                        data;
+                }
+            },
+            { 
+                data: 'campaign_expired_at', 
+                name: 'campaign_expired_at', 
+                orderable: false, 
+                render: function ( data, type, row ) {
                     return data;
                 }
             },
             { 
-                data: 'name', 
-                name: 'name', 
-                orderable: false,
+                data: 'reward_expired_at', 
+                name: 'reward_expired_at', 
+                orderable: false, 
                 render: function ( data, type, row ) {
-                    if(data == null){
-                        return '';
-                    }
-                    return data.length > 10 ?
-                        data.substr( 0, 10 ) + '…' + data.substr(data.length-10, data.length) :
-                        data;
-                }
-            },
-            {
-                data: 'detail',
-                name: 'detail',
-                orderable: false,
-                searchable: false,
-                className: 'text-center',
-                render: function ( data, type, row ) {
-                    if(data == null){
-                        return '';
-                    }
-                    return data.length > 10 ?
-                        data.substr( 0, 10 ) + '…' + data.substr(data.length-10, data.length) :
-                        data;
+                    return data;
                 }
             },
             { 
-                data: 'stamp_logo_url', 
-                name: 'stamp_logo_url', 
-                orderable: false,
+                data: 'reward_position', 
+                name: 'reward_position', 
+                orderable: false, 
                 render: function ( data, type, row ) {
                     if(data == null){
                         return '';
@@ -143,56 +177,7 @@
                         data.substr( 0, 10 ) + '…' + data.substr(data.length-10, data.length) :
                         data;
                 }
-            },
-            { data: 'stamp_per_page', name: 'stamp_per_page', orderable: false},
-            { 
-                data: 'background_url', 
-                name: 'background_url', 
-                orderable: false,
-                render: function ( data, type, row ) {
-                    if(data == null){
-                        return '';
-                    }
-                    return data.length > 10 ?
-                        data.substr( 0, 10 ) + '…' + data.substr(data.length-10, data.length) :
-                        data;
-                }
-            },
-            {
-                data: 'banner_url',
-                name: 'banner_url',
-                orderable: false,
-                searchable: false,
-                className: 'text-center',
-                render: function ( data, type, row ) {
-                    if(data == null){
-                        return '';
-                    }
-                    return data.length > 10 ?
-                        data.substr( 0, 10 ) + '…' + data.substr(data.length-10, data.length) :
-                        data;
-                }
-            }, 
-            {
-                data: 'policy',
-                name: 'policy',
-                orderable: false,
-                searchable: false,
-                className: 'text-center',
-                render: function ( data, type, row ) {
-                    if(data == null){
-                        return '';
-                    }
-                    return data.length > 10 ?
-                        data.substr( 0, 10 ) + '…' + data.substr(data.length-10, data.length) :
-                        data;
-                }
-            },
-            { data: 'active', name: 'active', orderable: false},
-            { data: 'collect_expired_at', name: 'collect_expired_at', orderable: false},
-            { data: 'campaign_expired_at', name: 'campaign_expired_at', orderable: false},
-            { data: 'verify_type', name: 'verify_type', orderable: false},
-            { data: 'started_at', name: 'started_at', orderable: false}
+            }
         ]
     });
     if (!!window.performance && window.performance.navigation.type === 2) {
